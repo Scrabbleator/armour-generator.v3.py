@@ -1,4 +1,5 @@
-import streamlit as st
+
+        import streamlit as st
 import openai
 import requests
 from PIL import Image
@@ -29,6 +30,18 @@ armor_material = st.sidebar.selectbox(
     ["Steel", "Bronze", "Gold", "Blackened Iron"]
 )
 
+# Helmet Options
+helmet = st.sidebar.selectbox(
+    "Helmet",
+    ["None", "Great Helm", "Bascinet", "Sallet", "Visored Helm"]
+)
+
+# Shoulder Armor Options
+shoulder_armor = st.sidebar.selectbox(
+    "Shoulder Armor",
+    ["None", "Spaulders", "Pauldrons", "Scaled Shoulders"]
+)
+
 # Engraving Style
 engraving_style = st.sidebar.selectbox(
     "Engraving Style",
@@ -55,6 +68,10 @@ if under_armor != "None":
     prompt += f"Underneath, they wear a {under_armor.lower()} dyed {base_layer_color}. "
 if over_armor and "None" not in over_armor:
     prompt += f"Over the armor, they wear {', '.join(over_armor).lower()}, dyed {cloak_color}. "
+if helmet != "None":
+    prompt += f"They wear a {helmet.lower()} on their head. "
+if shoulder_armor != "None":
+    prompt += f"Their shoulders are protected by {shoulder_armor.lower()}. "
 if design != "None":
     prompt += f"The armor is adorned with {design.lower()} designs. "
 if engraving_style != "None":
